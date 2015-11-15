@@ -1,0 +1,65 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Story Templates</h1>
+</div>
+<div class="wrapper-md" ng-controller="StoryListCtrl">
+  <div class="panel panel-default">
+    <div class="panel-body b-b b-light">
+      <span translate="aside.nav.components.pages.SEARCH">Search</span>: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+      <span style="float:right;">
+          <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="editTemplate()"><i class="fa fa-plus"></i>NEW</button>
+      </span>
+    </div>
+
+    <div style="padding-bottom: 10px;">
+      <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="10">
+        <thead>
+          <tr>
+              <th width="10%">
+                  <span>Author</span>
+              </th>
+              <th width="10%">
+                  <span>Genres</span>
+              </th>
+              <th width="10%">
+                  <span>Conflicts</span>
+              </th>
+              <th width="10%">
+                  <span>Characters</span>
+              </th>
+              <th width="30%">
+                  <span>Template</span>
+              </th>
+              <th data-hide="phone, tablet" width="10%">
+                  <span>Created</span>
+              </th>
+              <th data-hide="phone, tablet" width="10%">
+                  <span>Status</span>
+              </th>
+              <th width="10%">
+                  <span>Action</span>
+              </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="tpl in templates">
+              <td>{{users[tpl.userID]}}</td>
+              <td>{{tpl.genres}}</td>
+              <td>{{tpl.conflicts}}</td>
+              <td>{{tpl.character_count}}</td>
+              <td>{{tpl.template}}</td>
+              <td>{{tpl.created}}</td>
+              <td data-value="1"><span class="label bg-success" ng-show="tpl.status == true">Active</span><span class="label bg-warning" ng-show="tpl.status == false">Inactive</span></td>
+              <td><div class="list-icon action-icon" ng-show="tpl._id != user._id"><div><a href="" ng-click="activateTemplate(tpl._id);"><i class=" icon-check"></i></a></div><div><a href="" ng-click="editTemplate(tpl._id);"><i class="fa fa-pencil"></i></a></div><div><a href="" ng-click="removeTemplate('{{tpl._id}}');"><i class="glyphicon glyphicon-remove"></i></a></div></td>
+          </tr>
+        </tbody>
+        <tfoot class="hide-if-no-paging">
+          <tr>
+              <td colspan="5" class="text-center">
+                  <ul class="pagination"></ul>
+              </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>

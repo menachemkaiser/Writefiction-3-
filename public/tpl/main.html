@@ -1,0 +1,112 @@
+<div id="notification"></div>
+<div id="notification_success"></div>
+<div class="container" ng-controller="FictionCtrl">
+	<div class="bg-light lter b-b wrapper-md">
+		<h1 class="m-n font-thin h3">FICTION GENERATOR</h1>
+	</div>
+
+	<div class="wrapper-md">
+		<div class="row" ng-show="!story_result">
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form role="form">
+							<div class="form-group">
+								<label>Title (required)</label>
+								<input type="text" class="form-control" placeholder="Enter title" ng-model="title">
+							</div>
+
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+								<label>No. of Characters</label>
+								<input type="text" class="form-control" placeholder="Number of characters" ng-model="char_cnt" ng-keyup="$event.keyCode == 13 ? changeNumberOfCharacters() : null">
+							</div>
+							<div class="form-group">
+								<label>Character Names (as many or few as you want)</label><br/>
+								<div ng-repeat = "ch in characters">
+									<input type="text" class="form-control" placeholder="First Name" ng-model="ch.firstname" style="width: 49%; display: inline-block;">
+									<input type="text" class="form-control" placeholder="Last Name" ng-model="ch.lastname" style="width: 49%; display: inline-block;">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-8">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form role="form">
+							<div class="form-group">
+								<label><strong>Genres</strong> (Choose at least one)</label>
+								
+								<div class="row">
+									<div class="col-sm-3" ng-repeat="gen in genres">
+										<div class="checkbox">
+											<label class="i-checks">
+												<input type="checkbox" ng-model="gen.chk">
+												<i></i> {{gen.name}}
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="line line-dashed b-b line-lg"></div>
+
+							<div class="form-group">
+								<label><strong>Conflicts</strong> (Choose at least one)</label>
+								
+								<div class="row">
+									<div class="col-sm-3" ng-repeat="cf in conflicts">
+										<div class="checkbox">
+											<label class="i-checks">
+												<input type="checkbox" ng-model="cf.chk">
+												<i></i> {{cf.name}}
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="line line-dashed b-b line-lg"></div>
+							<div class="form-group">
+								<label><strong>Adjust Attributes</strong></label>
+								
+								<div class="row" ng-repeat="ad in adjusts" style="margin-bottom: 15px;">
+									<label class="col-sm-2 control-label">{{ad.name}}</label>
+					                <div class="col-sm-9">
+										<input ui-jq="slider" id="slider_{{ad._id}}" class="slider slider-horizontal form-control" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" data-slider-orientation="horizontal" value="5">
+					                </div>
+								</div>
+							</div>
+
+							<div class="line line-dashed b-b line-lg"></div>
+							<div style="text-align: right">
+								<button type="button" class="btn btn-md btn-info" ng-click="generate();">Generate</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" ng-show="story_result">
+			<div class="col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div style="text-align: right">
+							<button type="button" class="btn btn-md btn-info" ng-click="back();">Back</button>
+							<a href="" class="btn btn-md btn-primary pull-right" onclick="window.print();" style="margin-left: 5px;">Print</a>
+						</div>
+						<div class="story_area">
+							<div id="section-to-print" style="width: 100%">
+								<h3> {{title}} </h3>
+								<div id = "story"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

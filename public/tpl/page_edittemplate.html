@@ -1,0 +1,76 @@
+<div ng-controller="TemplateEditCtrl">
+  <div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3" ng-show="isEdit == false">NEW TEMPLATE</h1>
+    <h1 class="m-n font-thin h3" ng-show="isEdit == true">EDIT TEMPLATE</h1>
+  </div>
+  <div class="wrapper-md">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <br/>
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Genres</label>
+                <div class="col-lg-4">
+                  <ui-select multiple ng-model="multiSel.selectedGenre" theme="bootstrap" ng-disabled="disabled">
+                    <ui-select-match placeholder="Select genre...">{{$item.name}}</ui-select-match>
+                    <ui-select-choices repeat="genre in genres | propsFilter: {name: $select.search}">
+                      <div ng-bind-html="genre.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Conflicts</label>
+                <div class="col-lg-4">
+                  <ui-select multiple ng-model="multiSel2.selectedConflict" theme="bootstrap" ng-disabled="disabled">
+                    <ui-select-match placeholder="Select conflict...">{{$item.name}}</ui-select-match>
+                    <ui-select-choices repeat="conflict in conflicts | propsFilter: {name: $select.search}">
+                      <div ng-bind-html="conflict.name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                  </ui-select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Number of Characters</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" placeholder="Number of characters" ng-model="edittemplate.character_count">                 
+                </div>
+              </div>
+              
+              <div class="line line-dashed b-b line-lg pull-in"></div>
+
+              <div class="form-group" ng-repeat="ad in adjusts">
+                <label class="col-lg-2 control-label">{{ad.name}}</label>
+                <div class="col-lg-9">
+                  <input ui-jq="slider" id="slider_{{ad._id}}" class="slider slider-horizontal form-control" type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" data-slider-orientation="horizontal" value="5" ui-refresh="islideChange">
+                </div>
+              </div>
+
+              <div class="line line-dashed b-b line-lg pull-in"></div>
+
+              <div class="form-group">
+                <label class="col-lg-2 control-label">Template</label>
+                <div class="col-lg-9">
+                  <text-angular ng-model="edittemplate.template"></text-angular>
+                </div>
+              </div>
+
+              <div class="line line-dashed b-b line-lg pull-in"></div>
+
+              <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-9" style="text-align: right;">
+                  <button type="button" class="btn btn-sm btn-default" ng-click="cancel();">Cancel</button>
+                  <button type="button" class="btn btn-sm btn-info" ng-click="updateTemplate();">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

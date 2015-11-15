@@ -1,0 +1,65 @@
+<div ng-controller="GenreListCtrl">
+  <div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">Genre</h1>
+  </div>
+
+  <div class="wrapper-md">
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading font-bold">New</div>
+          <div class="panel-body">
+            <form role="form">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Enter name" ng-model="name">
+              </div>
+              <button class="btn btn-primary" ng-click="newEntry()">Create</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="panel panel-default">
+            <div style="padding-bottom: 10px;">
+              <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="10">
+                <thead>
+                  <tr>
+                      <th data-toggle="true" width="30%">
+                          Name
+                      </th>
+                      <th width="25%">
+                          Created
+                      </th>
+                      <th width="25%">
+                          Active Status
+                      </th>
+                      <th width="20%">
+                          Action
+                      </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="gn in genres">
+                      <td>{{gn.name}}</td>
+                      <td>{{gn.created}}</td>
+                      <td data-value="1"><span class="label bg-success" ng-show="gn.status == true">Active</span><span class="label bg-light" ng-show="gn.status == false">Disabled</span></td>
+                      <td><div class="list-icon action-icon"><div style="float: left"><a href="" ng-click="activate_deactivate('{{gn._id}}');"><i class="glyphicon glyphicon-eye-open"></i></a></div><div><a href="" ng-click="removeItem('{{gn._id}}');"><i class="glyphicon glyphicon-remove"></i></a></div></td>
+                  </tr>
+                </tbody>
+                <tfoot class="hide-if-no-paging">
+                  <tr>
+                      <td colspan="5" class="text-center">
+                          <ul class="pagination"></ul>
+                      </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
